@@ -23,6 +23,17 @@ body {
 	font-family: 'Space Mono', monospace;
 }
 
+.currentFriendsLink {
+    margin-left: 30px;
+}
+
+.surveyLink {
+    margin-left: 60px;
+}
+
+.homeLink {
+    margin-left: 60px;
+}
 
 /* ---------------The Modal (background)-------------------- */
 .modal {

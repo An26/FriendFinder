@@ -1,0 +1,16 @@
+Pet-Friend Finder
+==============================
+## SYNOPSIS
+
+This application I created will match you with a compatible friend that also likes dogs as much as you do! This application is a full-stack developed website for individuals who are looking for friends that love dogs as much as they do. 
+
+The user is prompted from the home page to take a quick survey that will take their responses and compare them with current users and find their most compatible friend. 
+
+## NPM PACKAGES NECESSARY TO RUN PROGRAM
+
+* express
+* body-parser
+
+Feel free to look at my code in my repository!
+
+<!-- Feel free to visit my website that was launched using Heroku here: -->
