@@ -77,20 +77,20 @@ function getUserInfo(){
 	//resets all of the input boxes and selections
 	$('#yourName').val("");
 	$('#yourPhoto').val("");
-	$('#selectForm0').prop('selectedIndex',1);
-	$('#selectForm1').prop('selectedIndex',1);
-	$('#selectForm2').prop('selectedIndex',1);
-	$('#selectForm3').prop('selectedIndex',1);
-	$('#selectForm4').prop('selectedIndex',1);
-	$('#selectForm5').prop('selectedIndex',1);
-	$('#selectForm6').prop('selectedIndex',1);
-	$('#selectForm7').prop('selectedIndex',1);
-	$('#selectForm8').prop('selectedIndex',1);
-	$('#selectForm9').prop('selectedIndex',1);
+	$('#selectForm0').prop('selectedIndex',0);
+	$('#selectForm0').prop('selectedIndex',0);
+	$('#selectForm2').prop('selectedIndex',0);
+	$('#selectForm3').prop('selectedIndex',0);
+	$('#selectForm4').prop('selectedIndex',0);
+	$('#selectForm5').prop('selectedIndex',0);
+	$('#selectForm6').prop('selectedIndex',0);
+	$('#selectForm7').prop('selectedIndex',0);
+	$('#selectForm8').prop('selectedIndex',0);
+	$('#selectForm9').prop('selectedIndex',0);
 
 	postNewFriend(newFriend);
 
-	return newFriend;	
+	return false;	//doesn't open a new window -> "submit/search"
 }
 
 function postNewFriend(newFriend){
@@ -112,7 +112,6 @@ function findFriendMatch(findFriendForMe){
 		method: 'GET'
 	}).done(function (data){
 		//console.log(data);
-		//console.log('data: ' + data[0].name + '\n' + data[0].img + '\n' + data[0].response);
 
 		var scoresTotalsArray = [];
 
@@ -141,8 +140,8 @@ function findFriendMatch(findFriendForMe){
 			var diffArraySum = eval(differenceArray.join('+')); 
 			scoresTotalsArray.push(diffArraySum);
 
-			//console.log('sum of diffArray = ' + diffArraySum);
-			console.log('scoresTotalsArray: ' + scoresTotalsArray);
+			console.log('sum of differences = ' + diffArraySum);
+			console.log('sums array: ' + scoresTotalsArray);
 
 
 		}
@@ -151,8 +150,37 @@ function findFriendMatch(findFriendForMe){
 		var bestFriendScore = Math.min.apply(Math, scoresTotalsArray);
 		var bestFriendIndex = scoresTotalsArray.indexOf(bestFriendScore);
 
-		//alert(data[bestFriendIndex].name);
+		var bestFriendName = data[bestFriendIndex].name;
+		var bestFriendImg = data[bestFriendIndex].img;
+
+		showModal(bestFriendName, bestFriendImg);
+
+
 	});
+}
+
+function showModal(bestMatchName, bestMatchLink){
+	var modal = document.getElementById('myModal');
+	var friendName = $('<h1>').html(bestMatchName);
+	var friendImg = $('<img>').attr('src', bestMatchLink);
+
+	$('.modal-content').append(friendName);
+	$('.modal-content').append(friendImg);
+
+	modal.style.display = "block";
+
+	var span = document.getElementsByClassName("close")[0];
+	span.onclick = function() {
+		modal.style.display = "none";
+	};
+
+	window.onclick = function(event) {
+	    if (event.target == modal) {
+	        modal.style.display = "none";
+	    }
+
+	}
+
 }
 
 
@@ -160,8 +188,8 @@ function findFriendMatch(findFriendForMe){
 
 $('document').ready(function() {
 	createQuestions();
-	//findFriendMatch();  //comment out when finalized, uncomment for testing
 	$('.submitBtn').on('click', getUserInfo);
+	//$('.submitBtn').on('click', showModal);
 });
 
 
