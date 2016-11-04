@@ -1,3 +1,4 @@
+
 var questions = [
 'Your mind is always buzzing with unexplored ideas and plans.', 
 'Generally speaking, you rely more on your experience than your imagination.', 
@@ -47,48 +48,124 @@ function createQuestions() {
 	};
 };
 
+function testFunc() {
+	console.log('am i working?');
+}
+
+function getUserInfo(){
+	var newFriend = {
+		name: $('#yourName').val().trim(),
+		img: $('#yourPhoto').val().trim(),
+		response: [
+		$('#selectForm0').find(":selected").text(),
+		$('#selectForm1').find(":selected").text(),
+		$('#selectForm2').find(":selected").text(),
+		$('#selectForm3').find(":selected").text(),
+		$('#selectForm4').find(":selected").text(),
+		$('#selectForm5').find(":selected").text(),
+		$('#selectForm6').find(":selected").text(),
+		$('#selectForm7').find(":selected").text(),
+		$('#selectForm8').find(":selected").text(),
+		$('#selectForm9').find(":selected").text()]
+	}
+	console.log(newFriend);
+
+	findFriendMatch(newFriend);
+
+	alert('Thank you for your submission!');
+
+	//resets all of the input boxes and selections
+	$('#yourName').val("");
+	$('#yourPhoto').val("");
+	$('#selectForm0').prop('selectedIndex',1);
+	$('#selectForm1').prop('selectedIndex',1);
+	$('#selectForm2').prop('selectedIndex',1);
+	$('#selectForm3').prop('selectedIndex',1);
+	$('#selectForm4').prop('selectedIndex',1);
+	$('#selectForm5').prop('selectedIndex',1);
+	$('#selectForm6').prop('selectedIndex',1);
+	$('#selectForm7').prop('selectedIndex',1);
+	$('#selectForm8').prop('selectedIndex',1);
+	$('#selectForm9').prop('selectedIndex',1);
+
+	postNewFriend(newFriend);
+
+	return newFriend;	
+}
+
+function postNewFriend(newFriend){
+	//POSTING to my friends/api page
+	var currentWindowURL = window.location.origin;
+
+	$.post(currentWindowURL + '/api/friends', newFriend, function(data){
+		console.log('friend was added!');
+	});
+}
+
+function findFriendMatch(findFriendForMe){
+	//get current friends from api - json call
+	var currentURL = window.location.origin;
+
+	//GET friends' scores, and compares it to newFriend, then pushes scores up to ScoresTotalArray.
+	$.ajax({
+		url: currentURL + '/api/friends', 
+		method: 'GET'
+	}).done(function (data){
+		//console.log(data);
+		//console.log('data: ' + data[0].name + '\n' + data[0].img + '\n' + data[0].response);
+
+		var scoresTotalsArray = [];
+
+		//for loop to find all the friends in the api array
+		for(var i = 0; i < data.length; i++){ 
+			console.log('------------------------------------------\napi length: ' + data.length);
+			console.log('friends: ' + data[i].name);
+			console.log('name: ' + data[i].name + '\nscores: ' + data[i].response);
+
+			var scores = data[i].response; //api response/scores array
+			var differenceArray = [];
+
+			//for loop to compare each friends' response array with new friend
+			for(var n = 0; n < scores.length; n++) { 
+				var apiScore = parseInt(scores[n].charAt(0));
+				var userScore = parseInt(findFriendForMe.response[n].charAt(0));
+				var difference = Math.abs(apiScore - userScore);
+				differenceArray.push(difference);
+
+				//console.log('api scores: ' + apiScore);
+				//console.log('new friend: ' + userScore);
+				//console.log('diff: ' + difference);
+				//console.log('diff array: ' + differenceArray);
+			}
+
+			var diffArraySum = eval(differenceArray.join('+')); 
+			scoresTotalsArray.push(diffArraySum);
+
+			//console.log('sum of diffArray = ' + diffArraySum);
+			console.log('scoresTotalsArray: ' + scoresTotalsArray);
+
+
+		}
+		//finds the most compatible score and alerts the compatible friend!
+
+		var bestFriendScore = Math.min.apply(Math, scoresTotalsArray);
+		var bestFriendIndex = scoresTotalsArray.indexOf(bestFriendScore);
+
+		//alert(data[bestFriendIndex].name);
+	});
+}
+
+
+
 
 $('document').ready(function() {
 	createQuestions();
-	$('submitBtn').on('click', getUserInfo());
-}); 
-
-//how to get a call back of answers from this dynamically created page?
-
-
-function getUserInfo() {
-
-
-newFriend = {
-	name: $('#yourName').val().trim(),
-	imgHref: $('#yourPhoto').val().trim()
-// 		response0: $('#selectForm0').find(":selected").text();
-// 		response1: $('#selectForm1').find(":selected").text();
-// 		response2: $('#selectForm2').find(":selected").text();
-// 		response3: $('#selectForm3').find(":selected").text();
-// 		response4: $('#selectForm4').find(":selected").text();
-// 		response5: $('#selectForm5').find(":selected").text();
-// 		response6: $('#selectForm6').find(":selected").text();
-// 		response7: $('#selectForm7').find(":selected").text();
-// 		response8: $('#selectForm8').find(":selected").text();
-// 		response9: $('#selectForm9').find(":selected").text();
-// 		//how to get values from the select forms?? 
-}
-console.log(newFriend);
-
-// 	// var currentWindowURL = window.location.origin;
-
-// 	// $.post(currentWindowURL + '/api/friends', newFriend, function(data){
-// 	// 	console.log('friend was added!');
-// 	// });
-};
+	//findFriendMatch();  //comment out when finalized, uncomment for testing
+	$('.submitBtn').on('click', getUserInfo);
+});
 
 
 
-// //at the end - to clear values in the inputs
-// $('#yourName').val("");
-// $('#yourPhoto').val("");
-// //how to clear the selectForms?
 
 
 

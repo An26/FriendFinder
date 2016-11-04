@@ -18,13 +18,13 @@ var apiRoute = require('./app/routing/api_routes.js');
 var htmlRoute = require('./app/routing/html-routes.js');
 
 app.use(express.static('app/public'));
+//makes the entire "public" folder availible for use
 
 require('./app/routing/api_routes.js')(app);
-
 require('./app/routing/html-routes.js')(app);
-
 
 
 app.listen(PORT, function () {
 	console.log('App listening on PORT: ' + PORT);
 });
+

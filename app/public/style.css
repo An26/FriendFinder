@@ -1,0 +1,25 @@
+body {
+    font-family: 'Work Sans', sans-serif;
+}
+
+.jumbotron {
+	background-color: #A4E5D4;
+	font-family: 'Space Mono', monospace;
+}
+
+.colOne, .colTwo {
+	color: #8C4F79;
+}
+
+.beginBtn {
+	background-color: #8C4F79;
+}
+
+.beginBtn:hoover {
+	background-color: #A4E5D4;
+}
+
+.page-header {
+	font-family: 'Space Mono', monospace;
+}
+

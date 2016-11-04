@@ -1,3 +1,5 @@
+//creates the routes once connected to the server for the followimg html pages.
+
 var path = require('path');
 
 module.exports = function (app) {

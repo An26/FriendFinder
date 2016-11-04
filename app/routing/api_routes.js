@@ -1,3 +1,5 @@
+//routes for the api pages
+
 var friends = require('../data/friends.js');
 
 module.exports = function (app) {
@@ -11,4 +13,5 @@ module.exports = function (app) {
 		res.json("You've been added!");
 	});
 }
+
 
