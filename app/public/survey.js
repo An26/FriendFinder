@@ -52,7 +52,26 @@ function createQuestions() {
 
 function testFunc() {
 	console.log('am i working?');
-}
+};
+
+
+function validation(friendInfo) {
+	if (friendInfo.name === ""){
+		alert('please add your user name');
+		return false;
+	} else if (friendInfo.img === "") {
+		alert('please add a link to your image');
+		return false;
+	} else {
+		for (var i = 0; i < friendInfo.response.length; i++){
+			if (friendInfo.response[i] === "Choose response") {
+				alert('Please choose a response for each question...');
+				return false;
+			}
+		}		
+	}
+	return true; 
+};
 
 function getUserInfo(){
 	var newFriend = {
@@ -70,7 +89,10 @@ function getUserInfo(){
 		$('#selectForm8').find(":selected").text(),
 		$('#selectForm9').find(":selected").text()]
 	}
+
 	console.log(newFriend);
+
+	if (validation(newFriend)) {
 
 	findFriendMatch(newFriend);
 
@@ -91,9 +113,9 @@ function getUserInfo(){
 	$('#selectForm9').prop('selectedIndex',0);
 
 	postNewFriend(newFriend);
-
+	}
 	return false;	//doesn't open a new window -> "submit/search"
-}
+};
 
 function postNewFriend(newFriend){
 	//POSTING to my friends/api page
@@ -114,6 +136,7 @@ function findFriendMatch(findFriendForMe){
 		method: 'GET'
 	}).done(function (data){
 		//console.log(data);
+
 
 		var scoresTotalsArray = [];
 
@@ -153,7 +176,9 @@ function findFriendMatch(findFriendForMe){
 		var bestFriendIndex = scoresTotalsArray.indexOf(bestFriendScore);
 
 		var bestFriendName = data[bestFriendIndex].name;
+		console.log(bestFriendName);
 		var bestFriendImg = data[bestFriendIndex].img;
+		console.log(bestFriendImg);
 
 		showModal(bestFriendName, bestFriendImg);
 
