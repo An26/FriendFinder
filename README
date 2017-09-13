@@ -11,7 +11,8 @@ The user is prompted from the home page to take a quick survey that will take th
 * express
 * body-parser
 
-Demo Here: https://mysterious-anchorage-36346.herokuapp.com/
+#### Demo Here: https://mysterious-anchorage-36346.herokuapp.com/
+
 
 ![landing page](https://github.com/An26/FriendFinder/blob/master/app/images/Screen%20Shot%202017-09-13%20at%2011.16.37%20AM.png)
 ![Survey, Friend Matching Magic](https://github.com/An26/FriendFinder/blob/master/app/images/Screen%20Shot%202017-09-13%20at%2011.16.20%20AM.png)
