@@ -6,13 +6,12 @@ This application I created will match you with a compatible friend that also lik
 
 The user is prompted from the home page to take a quick survey that will take their responses and compare them with current users and find their most compatible friend. 
 
-## [DEMO ME HERE](https://mysterious-anchorage-36346.herokuapp.com/)
-
 ## NPM PACKAGES NECESSARY TO RUN PROGRAM
 
 * express
 * body-parser
 
-Feel free to look at my code in my repository!
+Demo Here: https://mysterious-anchorage-36346.herokuapp.com/
 
-<!-- Feel free to visit my website that was launched using Heroku here: -->
+![landing page](https://github.com/An26/FriendFinder/blob/master/app/images/Screen%20Shot%202017-09-13%20at%2011.16.37%20AM.png)
+![Survey, Friend Matching Magic](https://github.com/An26/FriendFinder/blob/master/app/images/Screen%20Shot%202017-09-13%20at%2011.16.20%20AM.png)
